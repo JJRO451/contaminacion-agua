@@ -15,8 +15,8 @@
       --bg: #f0f7ff;
       --surface: #ffffff;
       --surface2: #eef4fb;
-      --border: rgba(0,0,0,0.10);
-      --border2: rgba(0,0,0,0.18);
+      --border: rgba(0,0,0,0.09);
+      --border2: rgba(0,0,0,0.17);
       --text: #1a2a3a;
       --text2: #4a6070;
       --blue: #0a7abf;
@@ -24,80 +24,256 @@
       --coral: #e05a3a;
       --amber: #e8a020;
       --green: #2ea84a;
+      --nav-h: 64px;
+      --sidebar-w: 240px;
       --radius: 16px;
       --radius-sm: 10px;
     }
+
+    html { scroll-behavior: smooth; }
 
     body {
       font-family: 'Nunito', sans-serif;
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
+      padding-top: var(--nav-h);
     }
 
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 2rem 1.25rem 4rem;
+    /* ══════════════════════════════
+       NAVBAR
+    ══════════════════════════════ */
+    .navbar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      background: var(--surface);
+      border-bottom: 1px solid var(--border2);
+      display: flex;
+      align-items: center;
+      padding: 0 1.5rem;
+      gap: 1rem;
+      z-index: 1000;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
     }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.2rem;
+      color: var(--blue);
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .nav-brand span { font-size: 1.5rem; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      margin-left: auto;
+      list-style: none;
+    }
+    .nav-links a {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 13px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text2);
+      text-decoration: none;
+      transition: all 0.18s;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      background: #e8f3fc;
+      color: var(--blue);
+    }
+    .nav-links a i { font-size: 1rem; }
+    .nav-burger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: var(--text);
+      margin-left: auto;
+    }
+    .nav-mobile-menu {
+      display: none;
+      position: fixed;
+      top: var(--nav-h);
+      left: 0; right: 0;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border2);
+      padding: 1rem 1.5rem;
+      flex-direction: column;
+      gap: 6px;
+      z-index: 999;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+    .nav-mobile-menu.open { display: flex; }
+    .nav-mobile-menu a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text2);
+      text-decoration: none;
+      transition: all 0.18s;
+    }
+    .nav-mobile-menu a:hover { background: #e8f3fc; color: var(--blue); }
+
+    /* ══════════════════════════════
+       LAYOUT: SIDEBAR + MAIN
+    ══════════════════════════════ */
+    .layout {
+      display: flex;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 0;
+      gap: 1.75rem;
+      align-items: flex-start;
+    }
+
+    /* ══════════════════════════════
+       SIDEBAR
+    ══════════════════════════════ */
+    .sidebar {
+      width: var(--sidebar-w);
+      flex-shrink: 0;
+      position: sticky;
+      top: calc(var(--nav-h) + 1.5rem);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .sidebar-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.1rem 1.1rem;
+    }
+    .sidebar-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1rem;
+      color: var(--blue);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .sidebar-nav-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .sidebar-nav-list a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text2);
+      text-decoration: none;
+      transition: all 0.18s;
+    }
+    .sidebar-nav-list a:hover, .sidebar-nav-list a.active {
+      background: #e8f3fc;
+      color: var(--blue);
+    }
+    .sidebar-nav-list a i { font-size: 1rem; flex-shrink: 0; }
+    .sidebar-nav-list a .nav-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--border2);
+      flex-shrink: 0;
+      margin-left: auto;
+      transition: background 0.2s;
+    }
+    .sidebar-nav-list a.active .nav-dot { background: var(--blue); }
+
+    .sidebar-fact {
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.6;
+      padding-top: 0.5rem;
+      border-top: 1px solid var(--border);
+      margin-top: 0.5rem;
+    }
+    .sidebar-fact strong { display: block; color: var(--text); font-weight: 800; margin-bottom: 3px; }
+
+    .sidebar-share { display: flex; flex-direction: column; gap: 8px; }
+    .share-btn {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 14px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      border: 1.5px solid var(--border2);
+      background: var(--surface2);
+      color: var(--text);
+      transition: all 0.18s;
+      text-decoration: none;
+    }
+    .share-btn:hover { border-color: var(--blue); color: var(--blue); background: #e8f3fc; }
+    .share-btn i { font-size: 1rem; }
+
+    /* ══════════════════════════════
+       MAIN CONTENT
+    ══════════════════════════════ */
+    .main-content { flex: 1; min-width: 0; }
 
     /* ── HERO ── */
     .hero {
       background: linear-gradient(135deg, #0a7abf 0%, #0fb8a0 55%, #34c97e 100%);
       border-radius: var(--radius);
-      padding: 3rem 2rem 3.5rem;
+      padding: 2.75rem 2rem 3rem;
       text-align: center;
       position: relative;
       overflow: hidden;
       margin-bottom: 2.5rem;
     }
     .hero::before {
-      content: '';
-      position: absolute;
+      content: ''; position: absolute;
       bottom: -40px; left: -30px;
       width: 140px; height: 140px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.07);
+      border-radius: 50%; background: rgba(255,255,255,0.07);
     }
     .hero::after {
-      content: '';
-      position: absolute;
+      content: ''; position: absolute;
       top: -50px; right: -30px;
       width: 180px; height: 180px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.05);
+      border-radius: 50%; background: rgba(255,255,255,0.05);
     }
     .hero-badge {
       display: inline-block;
       background: rgba(255,255,255,0.25);
-      color: #fff;
-      font-size: 13px;
-      font-weight: 700;
-      padding: 5px 16px;
-      border-radius: 20px;
-      margin-bottom: 1rem;
-      letter-spacing: 1px;
-      text-transform: uppercase;
+      color: #fff; font-size: 13px; font-weight: 700;
+      padding: 5px 16px; border-radius: 20px;
+      margin-bottom: 1rem; letter-spacing: 1px; text-transform: uppercase;
     }
     .hero-wave {
-      font-size: 2.5rem;
-      animation: float 3s ease-in-out infinite;
-      display: block;
-      margin-bottom: 0.5rem;
+      font-size: 2.5rem; animation: float 3s ease-in-out infinite;
+      display: block; margin-bottom: 0.5rem;
     }
     .hero h1 {
       font-family: 'Fredoka One', cursive;
-      font-size: clamp(1.8rem, 5vw, 2.8rem);
-      color: #fff;
-      line-height: 1.15;
-      margin-bottom: 0.8rem;
+      font-size: clamp(1.7rem, 4vw, 2.6rem);
+      color: #fff; line-height: 1.15; margin-bottom: 0.8rem;
     }
     .hero p {
-      color: rgba(255,255,255,0.92);
-      font-size: 1.05rem;
-      max-width: 520px;
-      margin: 0 auto;
-      line-height: 1.65;
+      color: rgba(255,255,255,0.92); font-size: 1rem;
+      max-width: 500px; margin: 0 auto; line-height: 1.65;
     }
     @keyframes float {
       0%,100% { transform: translateY(0); }
@@ -106,41 +282,27 @@
 
     /* ── SECTION TITLE ── */
     .section-title {
-      font-family: 'Fredoka One', cursive;
-      font-size: 1.5rem;
-      margin-bottom: 1.25rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--text);
+      font-family: 'Fredoka One', cursive; font-size: 1.45rem;
+      margin-bottom: 1.2rem; display: flex; align-items: center;
+      gap: 10px; color: var(--text); scroll-margin-top: calc(var(--nav-h) + 1.5rem);
     }
-    .section-title i { color: var(--blue); font-size: 1.4rem; }
+    .section-title i { color: var(--blue); font-size: 1.35rem; }
 
     /* ── STATS ── */
     .stats-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 14px;
-      margin-bottom: 2.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px; margin-bottom: 2.5rem;
     }
     .stat-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.4rem 1rem;
-      text-align: center;
-      transition: transform 0.22s, box-shadow 0.22s;
-      cursor: default;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.3rem 1rem;
+      text-align: center; transition: transform 0.22s, box-shadow 0.22s; cursor: default;
     }
     .stat-card:hover { transform: translateY(-5px); box-shadow: 0 8px 24px rgba(0,0,0,0.09); }
-    .stat-icon { font-size: 2rem; margin-bottom: 0.5rem; }
-    .stat-number {
-      font-family: 'Fredoka One', cursive;
-      font-size: 2.1rem;
-      line-height: 1;
-      margin-bottom: 5px;
-    }
-    .stat-label { font-size: 12.5px; color: var(--text2); line-height: 1.4; }
+    .stat-icon { font-size: 1.9rem; margin-bottom: 0.5rem; }
+    .stat-number { font-family: 'Fredoka One', cursive; font-size: 2rem; line-height: 1; margin-bottom: 5px; }
+    .stat-label { font-size: 12px; color: var(--text2); line-height: 1.4; }
     .blue .stat-number  { color: var(--blue); }
     .teal .stat-number  { color: var(--teal); }
     .coral .stat-number { color: var(--coral); }
@@ -149,289 +311,451 @@
     /* ── CAUSES ── */
     .causes-wrapper { margin-bottom: 2.5rem; }
     .causes-hint { font-size: 13.5px; color: var(--text2); margin-bottom: 0.9rem; }
-    .causes-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 0;
-    }
+    .causes-grid { display: flex; flex-wrap: wrap; gap: 10px; }
     .cause-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--surface);
-      border: 1.5px solid var(--border);
-      border-radius: 40px;
-      padding: 9px 18px;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s;
-      color: var(--text);
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--surface); border: 1.5px solid var(--border);
+      border-radius: 40px; padding: 9px 18px; font-size: 14px; font-weight: 700;
+      cursor: pointer; transition: all 0.2s; color: var(--text);
     }
     .cause-pill:hover { border-color: var(--blue); color: var(--blue); background: #e8f3fc; }
     .cause-pill.active { border-color: var(--blue); color: var(--blue); background: #e8f3fc; }
     .cause-detail {
-      display: none;
-      background: var(--surface);
-      border: 1px solid var(--border2);
-      border-left: 4px solid var(--blue);
-      border-radius: var(--radius-sm);
-      padding: 1rem 1.25rem;
-      margin-top: 0.9rem;
-      font-size: 14px;
-      color: var(--text2);
-      line-height: 1.7;
-      animation: fadein 0.25s ease;
+      display: none; background: var(--surface);
+      border: 1px solid var(--border2); border-left: 4px solid var(--blue);
+      border-radius: var(--radius-sm); padding: 1rem 1.25rem; margin-top: 0.9rem;
+      font-size: 14px; color: var(--text2); line-height: 1.7; animation: fadein 0.25s ease;
     }
     .cause-detail.show { display: block; }
-    @keyframes fadein { from { opacity: 0; transform: translateY(-6px); } to { opacity:1; transform:none; } }
+    @keyframes fadein { from { opacity:0; transform:translateY(-6px); } to { opacity:1; transform:none; } }
 
-    /* ── PROGRESS ── */
+    /* ── PROGRESS BARS ── */
     .progress-section { margin-bottom: 2.5rem; }
     .progress-item { margin-bottom: 1.4rem; }
     .progress-header { display: flex; justify-content: space-between; font-size: 14px; font-weight: 700; margin-bottom: 7px; }
     .bar-bg { height: 16px; background: var(--surface2); border-radius: 20px; overflow: hidden; border: 1px solid var(--border); }
     .bar-fill { height: 100%; border-radius: 20px; width: 0; transition: width 1.9s cubic-bezier(.4,0,.2,1); }
-    .bar-blue  { background: linear-gradient(90deg, #0a7abf, #42a5f5); }
-    .bar-teal  { background: linear-gradient(90deg, #0fb8a0, #26d0ba); }
-    .bar-coral { background: linear-gradient(90deg, #e05a3a, #f08060); }
-    .bar-amber { background: linear-gradient(90deg, #e8a020, #f5c340); }
+    .bar-blue  { background: linear-gradient(90deg,#0a7abf,#42a5f5); }
+    .bar-teal  { background: linear-gradient(90deg,#0fb8a0,#26d0ba); }
+    .bar-coral { background: linear-gradient(90deg,#e05a3a,#f08060); }
+    .bar-amber { background: linear-gradient(90deg,#e8a020,#f5c340); }
 
     /* ── QUIZ ── */
     .quiz-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.75rem;
-      margin-bottom: 2.5rem;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.6rem; margin-bottom: 2.5rem;
     }
-    .quiz-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; }
+    .quiz-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; }
     .quiz-progress-text { font-size: 13px; color: var(--text2); font-weight: 700; }
     .quiz-dots { display: flex; gap: 7px; }
-    .dot {
-      width: 11px; height: 11px; border-radius: 50%;
-      background: var(--surface2); border: 1.5px solid var(--border2);
-      transition: background 0.3s, border-color 0.3s;
-    }
-    .dot.done  { background: var(--teal);  border-color: var(--teal); }
-    .dot.current { background: var(--blue); border-color: var(--blue); }
-
-    .quiz-question { font-size: 1.05rem; font-weight: 800; margin-bottom: 1.1rem; line-height: 1.55; color: var(--text); }
+    .dot { width: 11px; height: 11px; border-radius: 50%; background: var(--surface2); border: 1.5px solid var(--border2); transition: all 0.3s; }
+    .dot.done   { background: var(--teal); border-color: var(--teal); }
+    .dot.current{ background: var(--blue); border-color: var(--blue); }
+    .quiz-question { font-size: 1rem; font-weight: 800; margin-bottom: 1.1rem; line-height: 1.55; }
     .quiz-opts { display: grid; gap: 9px; }
     .quiz-opt {
       display: flex; align-items: center; gap: 12px;
-      padding: 11px 16px;
-      border: 1.5px solid var(--border2);
-      border-radius: var(--radius-sm);
-      cursor: pointer; font-size: 14px; font-weight: 700;
-      background: var(--surface2);
-      transition: all 0.18s;
-      color: var(--text);
+      padding: 11px 16px; border: 1.5px solid var(--border2);
+      border-radius: var(--radius-sm); cursor: pointer; font-size: 14px; font-weight: 700;
+      background: var(--surface2); transition: all 0.18s; color: var(--text);
     }
     .quiz-opt:hover:not(.disabled) { background: var(--surface); border-color: var(--blue); color: var(--blue); }
     .quiz-opt.correct { background: #e2f7ec; border-color: var(--green); color: #175c28; }
     .quiz-opt.wrong   { background: #fdecea; border-color: #e24b4a; color: #7a1f1e; }
-    .quiz-opt.disabled { cursor: not-allowed; }
+    .quiz-opt.disabled{ cursor: not-allowed; }
     .opt-letter {
       width: 28px; height: 28px; border-radius: 50%;
       background: var(--surface); border: 1.5px solid var(--border2);
       display: flex; align-items: center; justify-content: center;
       font-size: 12px; font-weight: 800; flex-shrink: 0;
     }
-    .quiz-opt.correct .opt-letter { background: var(--green); color: #fff; border-color: var(--green); }
-    .quiz-opt.wrong   .opt-letter { background: #e24b4a;       color: #fff; border-color: #e24b4a; }
-
+    .quiz-opt.correct .opt-letter { background: var(--green); color:#fff; border-color: var(--green); }
+    .quiz-opt.wrong   .opt-letter { background: #e24b4a; color:#fff; border-color: #e24b4a; }
     .quiz-feedback {
-      margin-top: 13px; padding: 11px 15px;
-      border-radius: var(--radius-sm); font-size: 13.5px; font-weight: 600;
-      display: none; line-height: 1.55;
+      margin-top: 13px; padding: 11px 15px; border-radius: var(--radius-sm);
+      font-size: 13.5px; font-weight: 600; display: none; line-height: 1.55;
     }
     .quiz-feedback.show { display: block; }
     .quiz-feedback.correct { background: #e2f7ec; color: #175c28; border-left: 4px solid var(--green); }
     .quiz-feedback.wrong   { background: #fdecea; color: #7a1f1e; border-left: 4px solid #e24b4a; }
-
     .quiz-nav { margin-top: 16px; display: flex; justify-content: flex-end; }
     .btn-next {
       background: var(--blue); color: #fff; border: none;
-      padding: 10px 26px; border-radius: 30px;
-      font-size: 15px; font-weight: 700; cursor: pointer;
-      font-family: 'Nunito', sans-serif;
-      transition: background 0.18s, transform 0.12s;
-      display: none;
+      padding: 10px 26px; border-radius: 30px; font-size: 15px; font-weight: 700;
+      cursor: pointer; font-family: 'Nunito', sans-serif; transition: background 0.18s; display: none;
     }
     .btn-next:hover { background: #085fa0; }
-    .btn-next:active { transform: scale(0.97); }
     .btn-next.show { display: inline-block; }
     .btn-restart {
       background: var(--teal); color: #fff; border: none;
-      padding: 10px 26px; border-radius: 30px;
-      font-size: 15px; font-weight: 700; cursor: pointer;
-      font-family: 'Nunito', sans-serif;
-      transition: background 0.18s;
-      margin-top: 1.25rem;
+      padding: 10px 26px; border-radius: 30px; font-size: 15px; font-weight: 700;
+      cursor: pointer; font-family: 'Nunito', sans-serif; transition: background 0.18s; margin-top: 1.25rem;
     }
     .btn-restart:hover { background: #0a9a85; }
-
     .result-box { text-align: center; padding: 1.5rem 1rem; display: none; }
     .result-box.show { display: block; }
     .result-emoji { font-size: 3.5rem; margin-bottom: 0.6rem; }
-    .result-score { font-family: 'Fredoka One', cursive; font-size: 2.6rem; margin-bottom: 0.5rem; }
+    .result-score { font-family: 'Fredoka One', cursive; font-size: 2.5rem; margin-bottom: 0.5rem; }
     .result-msg { font-size: 1rem; color: var(--text2); line-height: 1.55; max-width: 400px; margin: 0 auto; }
 
     /* ── TIPS ── */
     .tips-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 12px;
-      margin-bottom: 2.5rem;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(210px,1fr));
+      gap: 12px; margin-bottom: 2.5rem;
     }
     .tip-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.1rem 1.1rem;
-      display: flex; gap: 12px; align-items: flex-start;
-      transition: transform 0.2s;
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 1.1rem; display: flex; gap: 12px; align-items: flex-start; transition: transform 0.2s;
     }
     .tip-card:hover { transform: translateY(-3px); }
     .tip-num { font-family: 'Fredoka One', cursive; font-size: 1.8rem; line-height: 1; color: var(--teal); flex-shrink: 0; }
     .tip-body { font-size: 13.5px; line-height: 1.55; color: var(--text2); }
     .tip-body strong { display: block; font-size: 14px; font-weight: 800; color: var(--text); margin-bottom: 2px; }
 
-    /* ── FOOTER BANNER ── */
+    /* ── FOOTER BANNER (inside main) ── */
     .footer-banner {
-      background: linear-gradient(135deg, #0a7abf, #0fb8a0);
-      border-radius: var(--radius);
-      padding: 2rem 1.5rem;
-      text-align: center;
-      color: #fff;
+      background: linear-gradient(135deg,#0a7abf,#0fb8a0);
+      border-radius: var(--radius); padding: 2rem 1.5rem;
+      text-align: center; color: #fff; margin-bottom: 0;
     }
-    .footer-banner h2 { font-family: 'Fredoka One', cursive; font-size: 1.5rem; margin-bottom: 0.6rem; }
+    .footer-banner h2 { font-family: 'Fredoka One', cursive; font-size: 1.45rem; margin-bottom: 0.6rem; }
     .footer-banner p { font-size: 0.95rem; opacity: 0.92; max-width: 480px; margin: 0 auto; line-height: 1.6; }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 500px) {
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .hero { padding: 2rem 1.25rem 2.5rem; }
+    /* ══════════════════════════════
+       FOOTER
+    ══════════════════════════════ */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border2);
+      margin-top: 3rem;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 1.5rem;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 2rem;
+    }
+    .footer-brand-name {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.2rem;
+      color: var(--blue);
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 0.65rem;
+    }
+    .footer-desc { font-size: 13px; color: var(--text2); line-height: 1.65; }
+    .footer-col-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1rem; color: var(--text);
+      margin-bottom: 0.75rem;
+    }
+    .footer-links { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .footer-links a {
+      font-size: 13.5px; color: var(--text2); text-decoration: none;
+      display: flex; align-items: center; gap: 7px; font-weight: 600;
+      transition: color 0.18s;
+    }
+    .footer-links a:hover { color: var(--blue); }
+    .footer-links a i { font-size: 0.9rem; }
+    .footer-bottom {
+      max-width: 1200px; margin: 0 auto;
+      padding: 1rem 1.5rem;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 12.5px; color: var(--text2);
+      flex-wrap: wrap; gap: 8px;
+    }
+    .footer-bottom a { color: var(--blue); text-decoration: none; font-weight: 700; }
+
+    /* ══════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════ */
+    @media (max-width: 900px) {
+      .sidebar { display: none; }
+      .layout { padding: 1.5rem 1rem 0; }
+    }
+    @media (max-width: 680px) {
+      .nav-links { display: none; }
+      .nav-burger { display: block; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .stats-grid { grid-template-columns: repeat(2,1fr); }
+      .footer-inner { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
     }
   </style>
 </head>
 <body>
-<main class="container">
 
-  <!-- HERO -->
-  <section class="hero">
-    <span class="hero-badge">🌊 Educación ambiental</span>
-    <span class="hero-wave" aria-hidden="true">💧</span>
-    <h1>La Contaminación del Agua</h1>
-    <p>Aprende sobre uno de los mayores problemas del planeta y descubre cómo tú puedes marcar la diferencia.</p>
-  </section>
+  <!-- ══ NAVBAR ══ -->
+  <nav class="navbar" role="navigation" aria-label="Navegación principal">
+    <a href="#inicio" class="nav-brand">
+      <span>💧</span> AguaLimpia
+    </a>
+    <ul class="nav-links">
+      <li><a href="#cifras" class="active"><i class="ti ti-chart-bar"></i> Cifras</a></li>
+      <li><a href="#causas"><i class="ti ti-alert-triangle"></i> Causas</a></li>
+      <li><a href="#riesgo"><i class="ti ti-droplet"></i> En Riesgo</a></li>
+      <li><a href="#quiz"><i class="ti ti-help-circle"></i> Quiz</a></li>
+      <li><a href="#acciones"><i class="ti ti-bulb"></i> Acciones</a></li>
+    </ul>
+    <button class="nav-burger" onclick="toggleMobileMenu()" aria-label="Menú">
+      <i class="ti ti-menu-2" id="burger-icon"></i>
+    </button>
+  </nav>
 
-  <!-- STATS -->
-  <h2 class="section-title"><i class="ti ti-chart-bar" aria-hidden="true"></i> Cifras que impactan</h2>
-  <div class="stats-grid" id="stats-grid">
-    <div class="stat-card blue">
-      <div class="stat-icon" aria-hidden="true">🌍</div>
-      <div class="stat-number"><span class="counter" data-target="2200">0</span>M</div>
-      <div class="stat-label">personas sin agua potable segura</div>
-    </div>
-    <div class="stat-card coral">
-      <div class="stat-icon" aria-hidden="true">💀</div>
-      <div class="stat-number"><span class="counter" data-target="3.4" data-decimal="1">0</span>M</div>
-      <div class="stat-label">muertes al año por agua contaminada</div>
-    </div>
-    <div class="stat-card teal">
-      <div class="stat-icon" aria-hidden="true">🏭</div>
-      <div class="stat-number"><span class="counter" data-target="80">0</span>%</div>
-      <div class="stat-label">de aguas residuales sin tratar</div>
-    </div>
-    <div class="stat-card green">
-      <div class="stat-icon" aria-hidden="true">🐠</div>
-      <div class="stat-number"><span class="counter" data-target="1">0</span>M+</div>
-      <div class="stat-label">animales marinos mueren cada año</div>
-    </div>
+  <!-- ══ MOBILE MENU ══ -->
+  <div class="nav-mobile-menu" id="mobile-menu">
+    <a href="#cifras"   onclick="closeMobileMenu()"><i class="ti ti-chart-bar"></i> Cifras</a>
+    <a href="#causas"   onclick="closeMobileMenu()"><i class="ti ti-alert-triangle"></i> Causas</a>
+    <a href="#riesgo"   onclick="closeMobileMenu()"><i class="ti ti-droplet"></i> En Riesgo</a>
+    <a href="#quiz"     onclick="closeMobileMenu()"><i class="ti ti-help-circle"></i> Quiz</a>
+    <a href="#acciones" onclick="closeMobileMenu()"><i class="ti ti-bulb"></i> Acciones</a>
   </div>
 
-  <!-- CAUSES -->
-  <h2 class="section-title"><i class="ti ti-alert-triangle" aria-hidden="true"></i> ¿Qué contamina el agua?</h2>
-  <div class="causes-wrapper">
-    <p class="causes-hint">Toca cada causa para conocer más detalles:</p>
-    <div class="causes-grid" id="causes-grid">
-      <button class="cause-pill" onclick="toggleCause(0)">🏭 Industrias</button>
-      <button class="cause-pill" onclick="toggleCause(1)">🌾 Agricultura</button>
-      <button class="cause-pill" onclick="toggleCause(2)">🚽 Aguas residuales</button>
-      <button class="cause-pill" onclick="toggleCause(3)">🛢️ Derrames de petróleo</button>
-      <button class="cause-pill" onclick="toggleCause(4)">🗑️ Residuos sólidos</button>
-      <button class="cause-pill" onclick="toggleCause(5)">💊 Medicamentos</button>
-    </div>
-    <div class="cause-detail" id="cause-detail" role="region" aria-live="polite"></div>
-  </div>
+  <!-- ══ LAYOUT ══ -->
+  <div class="layout">
 
-  <!-- PROGRESS BARS -->
-  <h2 class="section-title"><i class="ti ti-droplet" aria-hidden="true"></i> ¿Cuánta agua está en riesgo?</h2>
-  <div class="progress-section" id="progress-section">
-    <div class="progress-item">
-      <div class="progress-header"><span>Ríos y lagos contaminados</span><span style="color:var(--blue)">60%</span></div>
-      <div class="bar-bg"><div class="bar-fill bar-blue" data-target="60"></div></div>
-    </div>
-    <div class="progress-item">
-      <div class="progress-header"><span>Océanos con plástico</span><span style="color:var(--teal)">88%</span></div>
-      <div class="bar-bg"><div class="bar-fill bar-teal" data-target="88"></div></div>
-    </div>
-    <div class="progress-item">
-      <div class="progress-header"><span>Acuíferos subterráneos afectados</span><span style="color:var(--coral)">43%</span></div>
-      <div class="bar-bg"><div class="bar-fill bar-coral" data-target="43"></div></div>
-    </div>
-    <div class="progress-item">
-      <div class="progress-header"><span>Agua potable con contaminantes</span><span style="color:var(--amber)">35%</span></div>
-      <div class="bar-bg"><div class="bar-fill bar-amber" data-target="35"></div></div>
-    </div>
-  </div>
+    <!-- ── SIDEBAR ── -->
+    <aside class="sidebar" aria-label="Barra lateral">
 
-  <!-- QUIZ -->
-  <h2 class="section-title"><i class="ti ti-help-circle" aria-hidden="true"></i> Pon a prueba tu conocimiento</h2>
-  <div class="quiz-card">
-    <div id="quiz-content">
-      <div class="quiz-meta">
-        <span class="quiz-progress-text" id="quiz-progress">Pregunta 1 de 5</span>
-        <div class="quiz-dots" id="quiz-dots" role="progressbar" aria-label="Progreso del quiz"></div>
+      <div class="sidebar-card">
+        <div class="sidebar-title"><i class="ti ti-list"></i> Contenido</div>
+        <ul class="sidebar-nav-list" id="sidebar-nav">
+          <li><a href="#cifras"   class="active"><i class="ti ti-chart-bar"></i> Cifras<span class="nav-dot"></span></a></li>
+          <li><a href="#causas"><i class="ti ti-alert-triangle"></i> Causas<span class="nav-dot"></span></a></li>
+          <li><a href="#riesgo"><i class="ti ti-droplet"></i> En Riesgo<span class="nav-dot"></span></a></li>
+          <li><a href="#quiz"><i class="ti ti-help-circle"></i> Quiz<span class="nav-dot"></span></a></li>
+          <li><a href="#acciones"><i class="ti ti-bulb"></i> Acciones<span class="nav-dot"></span></a></li>
+        </ul>
       </div>
-      <p class="quiz-question" id="quiz-question"></p>
-      <div class="quiz-opts" id="quiz-opts"></div>
-      <div class="quiz-feedback" id="quiz-feedback" role="alert"></div>
-      <div class="quiz-nav">
-        <button class="btn-next" id="btn-next" onclick="nextQuestion()">Siguiente →</button>
+
+      <div class="sidebar-card">
+        <div class="sidebar-title"><i class="ti ti-bulb"></i> ¿Sabías que…?</div>
+        <div class="sidebar-fact">
+          <strong id="fact-title">Dato del día</strong>
+          <span id="fact-text">Cargando…</span>
+        </div>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-title"><i class="ti ti-share"></i> Comparte</div>
+        <div class="sidebar-share">
+          <a class="share-btn" href="https://twitter.com/intent/tweet?text=Aprende+sobre+la+contaminaci%C3%B3n+del+agua+%F0%9F%92%A7&url=https://tu-usuario.github.io/contaminacion-agua" target="_blank" rel="noopener">
+            <i class="ti ti-brand-twitter"></i> Twitter / X
+          </a>
+          <a class="share-btn" href="https://wa.me/?text=Aprende+sobre+la+contaminaci%C3%B3n+del+agua+%F0%9F%92%A7+https://tu-usuario.github.io/contaminacion-agua" target="_blank" rel="noopener">
+            <i class="ti ti-brand-whatsapp"></i> WhatsApp
+          </a>
+          <button class="share-btn" onclick="copyLink()">
+            <i class="ti ti-link" id="copy-icon"></i> <span id="copy-label">Copiar enlace</span>
+          </button>
+        </div>
+      </div>
+
+    </aside>
+
+    <!-- ── MAIN ── -->
+    <main class="main-content" id="inicio">
+
+      <!-- HERO -->
+      <section class="hero">
+        <span class="hero-badge">🌊 Educación ambiental</span>
+        <span class="hero-wave" aria-hidden="true">💧</span>
+        <h1>La Contaminación del Agua</h1>
+        <p>Aprende sobre uno de los mayores problemas del planeta y descubre cómo tú puedes marcar la diferencia.</p>
+      </section>
+
+      <!-- STATS -->
+      <h2 class="section-title" id="cifras"><i class="ti ti-chart-bar" aria-hidden="true"></i> Cifras que impactan</h2>
+      <div class="stats-grid" id="stats-grid">
+        <div class="stat-card blue">
+          <div class="stat-icon" aria-hidden="true">🌍</div>
+          <div class="stat-number"><span class="counter" data-target="2200">0</span>M</div>
+          <div class="stat-label">personas sin agua potable segura</div>
+        </div>
+        <div class="stat-card coral">
+          <div class="stat-icon" aria-hidden="true">💀</div>
+          <div class="stat-number"><span class="counter" data-target="3.4" data-decimal="1">0</span>M</div>
+          <div class="stat-label">muertes al año por agua contaminada</div>
+        </div>
+        <div class="stat-card teal">
+          <div class="stat-icon" aria-hidden="true">🏭</div>
+          <div class="stat-number"><span class="counter" data-target="80">0</span>%</div>
+          <div class="stat-label">de aguas residuales sin tratar</div>
+        </div>
+        <div class="stat-card green">
+          <div class="stat-icon" aria-hidden="true">🐠</div>
+          <div class="stat-number"><span class="counter" data-target="1">0</span>M+</div>
+          <div class="stat-label">animales marinos mueren cada año</div>
+        </div>
+      </div>
+
+      <!-- CAUSES -->
+      <h2 class="section-title" id="causas"><i class="ti ti-alert-triangle" aria-hidden="true"></i> ¿Qué contamina el agua?</h2>
+      <div class="causes-wrapper">
+        <p class="causes-hint">Toca cada causa para conocer más detalles:</p>
+        <div class="causes-grid" id="causes-grid">
+          <button class="cause-pill" onclick="toggleCause(0)">🏭 Industrias</button>
+          <button class="cause-pill" onclick="toggleCause(1)">🌾 Agricultura</button>
+          <button class="cause-pill" onclick="toggleCause(2)">🚽 Aguas residuales</button>
+          <button class="cause-pill" onclick="toggleCause(3)">🛢️ Derrames de petróleo</button>
+          <button class="cause-pill" onclick="toggleCause(4)">🗑️ Residuos sólidos</button>
+          <button class="cause-pill" onclick="toggleCause(5)">💊 Medicamentos</button>
+        </div>
+        <div class="cause-detail" id="cause-detail" role="region" aria-live="polite"></div>
+      </div>
+
+      <!-- PROGRESS BARS -->
+      <h2 class="section-title" id="riesgo"><i class="ti ti-droplet" aria-hidden="true"></i> ¿Cuánta agua está en riesgo?</h2>
+      <div class="progress-section" id="progress-section">
+        <div class="progress-item">
+          <div class="progress-header"><span>Ríos y lagos contaminados</span><span style="color:var(--blue)">60%</span></div>
+          <div class="bar-bg"><div class="bar-fill bar-blue" data-target="60"></div></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-header"><span>Océanos con plástico</span><span style="color:var(--teal)">88%</span></div>
+          <div class="bar-bg"><div class="bar-fill bar-teal" data-target="88"></div></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-header"><span>Acuíferos subterráneos afectados</span><span style="color:var(--coral)">43%</span></div>
+          <div class="bar-bg"><div class="bar-fill bar-coral" data-target="43"></div></div>
+        </div>
+        <div class="progress-item">
+          <div class="progress-header"><span>Agua potable con contaminantes</span><span style="color:var(--amber)">35%</span></div>
+          <div class="bar-bg"><div class="bar-fill bar-amber" data-target="35"></div></div>
+        </div>
+      </div>
+
+      <!-- QUIZ -->
+      <h2 class="section-title" id="quiz"><i class="ti ti-help-circle" aria-hidden="true"></i> Pon a prueba tu conocimiento</h2>
+      <div class="quiz-card">
+        <div id="quiz-content">
+          <div class="quiz-meta">
+            <span class="quiz-progress-text" id="quiz-progress">Pregunta 1 de 5</span>
+            <div class="quiz-dots" id="quiz-dots" role="progressbar" aria-label="Progreso del quiz"></div>
+          </div>
+          <p class="quiz-question" id="quiz-question"></p>
+          <div class="quiz-opts" id="quiz-opts"></div>
+          <div class="quiz-feedback" id="quiz-feedback" role="alert"></div>
+          <div class="quiz-nav">
+            <button class="btn-next" id="btn-next" onclick="nextQuestion()">Siguiente →</button>
+          </div>
+        </div>
+        <div class="result-box" id="result-box">
+          <div class="result-emoji" id="result-emoji"></div>
+          <div class="result-score" id="result-score"></div>
+          <p class="result-msg" id="result-msg"></p>
+          <button class="btn-restart" onclick="restartQuiz()">Intentar de nuevo ↺</button>
+        </div>
+      </div>
+
+      <!-- TIPS -->
+      <h2 class="section-title" id="acciones"><i class="ti ti-bulb" aria-hidden="true"></i> Acciones que tú puedes tomar</h2>
+      <div class="tips-grid">
+        <div class="tip-card"><div class="tip-num">1</div><div class="tip-body"><strong>Reduce el plástico</strong>Usa bolsas, botellas y utensilios reutilizables para evitar que el plástico llegue a los ríos.</div></div>
+        <div class="tip-card"><div class="tip-num">2</div><div class="tip-body"><strong>No tires basura</strong>Nunca deseches residuos en ríos, lagos o playas. Busca contenedores o puntos de reciclaje.</div></div>
+        <div class="tip-card"><div class="tip-num">3</div><div class="tip-body"><strong>Ahorra agua</strong>Cierra la llave mientras te cepillas los dientes. ¡Puedes ahorrar hasta 12 litros por día!</div></div>
+        <div class="tip-card"><div class="tip-num">4</div><div class="tip-body"><strong>Usa menos químicos</strong>Prefiere productos de limpieza biodegradables que no dañen los mantos acuíferos.</div></div>
+        <div class="tip-card"><div class="tip-num">5</div><div class="tip-body"><strong>Infórmate y comparte</strong>Habla con tu familia y amigos sobre este problema. ¡La conciencia colectiva cambia el mundo!</div></div>
+        <div class="tip-card"><div class="tip-num">6</div><div class="tip-body"><strong>Participa en limpiezas</strong>Únete a brigadas de limpieza de ríos y costas en tu comunidad.</div></div>
+      </div>
+
+      <!-- FOOTER BANNER -->
+      <div class="footer-banner">
+        <h2>El agua es vida. Protegerla es tu responsabilidad. 💙</h2>
+        <p>Cada pequeña acción cuenta. Juntos podemos garantizar agua limpia para las generaciones futuras.</p>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ══ FOOTER ══ -->
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="footer-brand-name"><span>💧</span> AguaLimpia</div>
+        <p class="footer-desc">Proyecto educativo interactivo dedicado a concientizar a jóvenes sobre la crisis global del agua y cómo podemos actuar juntos.</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Secciones</div>
+        <ul class="footer-links">
+          <li><a href="#cifras"><i class="ti ti-chart-bar"></i> Cifras que impactan</a></li>
+          <li><a href="#causas"><i class="ti ti-alert-triangle"></i> Causas</a></li>
+          <li><a href="#riesgo"><i class="ti ti-droplet"></i> Agua en riesgo</a></li>
+          <li><a href="#quiz"><i class="ti ti-help-circle"></i> Quiz interactivo</a></li>
+          <li><a href="#acciones"><i class="ti ti-bulb"></i> Acciones</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Recursos externos</div>
+        <ul class="footer-links">
+          <li><a href="https://www.un.org/es/global-issues/water" target="_blank" rel="noopener"><i class="ti ti-external-link"></i> ONU – Agua</a></li>
+          <li><a href="https://www.who.int/es/news-room/fact-sheets/detail/drinking-water" target="_blank" rel="noopener"><i class="ti ti-external-link"></i> OMS – Agua potable</a></li>
+          <li><a href="https://www.worldwatercouncil.org/" target="_blank" rel="noopener"><i class="ti ti-external-link"></i> World Water Council</a></li>
+          <li><a href="https://www.greenpeace.org/mexico/" target="_blank" rel="noopener"><i class="ti ti-external-link"></i> Greenpeace México</a></li>
+        </ul>
       </div>
     </div>
-    <div class="result-box" id="result-box">
-      <div class="result-emoji" id="result-emoji"></div>
-      <div class="result-score" id="result-score"></div>
-      <p class="result-msg" id="result-msg"></p>
-      <button class="btn-restart" onclick="restartQuiz()">Intentar de nuevo ↺</button>
+    <div class="footer-bottom">
+      <span>© 2025 AguaLimpia · Proyecto educativo de acceso libre</span>
+      <span>Hecho con 💙 para concientizar a las nuevas generaciones</span>
     </div>
-  </div>
-
-  <!-- TIPS -->
-  <h2 class="section-title"><i class="ti ti-bulb" aria-hidden="true"></i> Acciones que tú puedes tomar</h2>
-  <div class="tips-grid">
-    <div class="tip-card"><div class="tip-num">1</div><div class="tip-body"><strong>Reduce el plástico</strong>Usa bolsas, botellas y utensilios reutilizables para evitar que el plástico llegue a los ríos.</div></div>
-    <div class="tip-card"><div class="tip-num">2</div><div class="tip-body"><strong>No tires basura</strong>Nunca deseches residuos en ríos, lagos o playas. Busca contenedores o puntos de reciclaje.</div></div>
-    <div class="tip-card"><div class="tip-num">3</div><div class="tip-body"><strong>Ahorra agua</strong>Cierra la llave mientras te cepillas los dientes. ¡Puedes ahorrar hasta 12 litros por día!</div></div>
-    <div class="tip-card"><div class="tip-num">4</div><div class="tip-body"><strong>Usa menos químicos</strong>Prefiere productos de limpieza biodegradables que no dañen los mantos acuíferos.</div></div>
-    <div class="tip-card"><div class="tip-num">5</div><div class="tip-body"><strong>Infórmate y comparte</strong>Habla con tu familia y amigos sobre este problema. ¡La conciencia colectiva cambia el mundo!</div></div>
-    <div class="tip-card"><div class="tip-num">6</div><div class="tip-body"><strong>Participa en limpiezas</strong>Únete a brigadas de limpieza de ríos y costas en tu comunidad.</div></div>
-  </div>
-
-  <!-- FOOTER BANNER -->
-  <div class="footer-banner">
-    <h2>El agua es vida. Protegerla es tu responsabilidad.</h2>
-    <p>Proyecto hehco por Rodriguez Cuahua Carlos Eduardo, Marquez Morales Fabio Sadot, Gerardo Torres Martinez, Gonzalez Jimenez Josue y Robles Osorio Juan Jose.</p>
-  </div>
-
-</main>
+  </footer>
 
 <script>
+  /* ─── MOBILE MENU ─── */
+  function toggleMobileMenu() {
+    const m = document.getElementById('mobile-menu');
+    const icon = document.getElementById('burger-icon');
+    const open = m.classList.toggle('open');
+    icon.className = open ? 'ti ti-x' : 'ti ti-menu-2';
+  }
+  function closeMobileMenu() {
+    document.getElementById('mobile-menu').classList.remove('open');
+    document.getElementById('burger-icon').className = 'ti ti-menu-2';
+  }
+
+  /* ─── ACTIVE NAV HIGHLIGHT ON SCROLL ─── */
+  const sections = ['cifras','causas','riesgo','quiz','acciones'];
+  function updateActiveNav() {
+    let current = '';
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && window.scrollY >= el.offsetTop - 100) current = id;
+    });
+    document.querySelectorAll('.nav-links a, .sidebar-nav-list a').forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  }
+  window.addEventListener('scroll', updateActiveNav, { passive: true });
+
+  /* ─── COPY LINK ─── */
+  function copyLink() {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      document.getElementById('copy-label').textContent = '¡Copiado!';
+      document.getElementById('copy-icon').className = 'ti ti-check';
+      setTimeout(() => {
+        document.getElementById('copy-label').textContent = 'Copiar enlace';
+        document.getElementById('copy-icon').className = 'ti ti-link';
+      }, 2000);
+    });
+  }
+
+  /* ─── SIDEBAR FACTS ─── */
+  const facts = [
+    { title: '1 de cada 3 personas', text: 'No tiene acceso a agua potable segura en todo el mundo.' },
+    { title: '8 millones de toneladas', text: 'De plástico terminan en los océanos cada año.' },
+    { title: '70% del agua dulce', text: 'Se destina a la agricultura, mucha de ella vuelve contaminada.' },
+    { title: '663 millones', text: 'De personas aún beben agua de fuentes sin protección.' },
+    { title: 'El océano Pacífico', text: 'Tiene una isla de basura plástica del tamaño de Texas.' },
+  ];
+  const f = facts[Math.floor(Math.random() * facts.length)];
+  document.getElementById('fact-title').textContent = f.title;
+  document.getElementById('fact-text').textContent = f.text;
+
   /* ─── CAUSES ─── */
   const causeDetails = [
     "Las industrias vierten metales pesados, sustancias tóxicas y residuos químicos directamente en ríos y mares. Se estima que las industrias representan el 70% de la contaminación industrial del agua a nivel mundial.",
@@ -445,11 +769,7 @@
   function toggleCause(i) {
     const det = document.getElementById('cause-detail');
     const pills = document.querySelectorAll('.cause-pill');
-    if (activeCause === i) {
-      det.classList.remove('show'); activeCause = -1;
-      pills.forEach(p => p.classList.remove('active'));
-      return;
-    }
+    if (activeCause === i) { det.classList.remove('show'); activeCause = -1; pills.forEach(p => p.classList.remove('active')); return; }
     det.textContent = causeDetails[i];
     det.classList.add('show');
     activeCause = i;
@@ -473,9 +793,7 @@
 
   /* ─── PROGRESS BARS ─── */
   function animateBars() {
-    document.querySelectorAll('.bar-fill').forEach(bar => {
-      bar.style.width = bar.dataset.target + '%';
-    });
+    document.querySelectorAll('.bar-fill').forEach(bar => { bar.style.width = bar.dataset.target + '%'; });
   }
 
   /* ─── INTERSECTION OBSERVER ─── */
@@ -489,61 +807,32 @@
   }, { threshold: 0.15 });
   obs.observe(document.getElementById('stats-grid'));
 
-  /* ─── QUIZ DATA ─── */
+  /* ─── QUIZ ─── */
   const questions = [
-    {
-      q: "¿Cuál es la principal fuente de contaminación del agua en el mundo?",
-      opts: ["Lluvia ácida", "Desechos industriales y aguas residuales", "Erupciones volcánicas", "Tormentas de arena"],
-      ans: 1,
-      exp: "Los desechos industriales y aguas residuales sin tratar son la causa número 1 de contaminación del agua a nivel mundial, afectando a millones de personas."
-    },
-    {
-      q: "¿Cuántos litros de agua se necesitan aproximadamente para producir un kilo de carne de res?",
-      opts: ["500 litros", "5,000 litros", "15,000 litros", "1 millón de litros"],
-      ans: 2,
-      exp: "Se necesitan aproximadamente 15,000 litros de agua para producir 1 kg de carne de res. ¡Una razón más para reducir el consumo de carne!"
-    },
-    {
-      q: "¿Qué porcentaje del agua de la Tierra es apta para consumo humano?",
-      opts: ["50%", "20%", "10%", "Menos del 3%"],
-      ans: 3,
-      exp: "Solo el 2.5–3% del agua del planeta es dulce, y de esa fracción, muy poca es accesible y potable directamente para los seres humanos."
-    },
-    {
-      q: "¿Qué material tarda más de 400 años en degradarse en el océano?",
-      opts: ["Papel", "Vidrio", "Plástico", "Algodón"],
-      ans: 2,
-      exp: "El plástico puede tardar entre 400 y 1,000 años en degradarse. Actualmente hay más de 150 millones de toneladas de plástico en nuestros océanos."
-    },
-    {
-      q: "¿Cuál de estas acciones ayuda MÁS a reducir la contaminación del agua en casa?",
-      opts: ["Bañarse todos los días", "Tirar aceite por el drenaje", "Usar menos detergentes químicos", "Regar las plantas con agua del grifo"],
-      ans: 2,
-      exp: "Los detergentes con fosfatos y químicos dañinos destruyen la vida acuática al llegar a ríos y mares. Usar productos biodegradables marca una gran diferencia."
-    }
+    { q:"¿Cuál es la principal fuente de contaminación del agua en el mundo?", opts:["Lluvia ácida","Desechos industriales y aguas residuales","Erupciones volcánicas","Tormentas de arena"], ans:1, exp:"Los desechos industriales y aguas residuales sin tratar son la causa número 1 de contaminación del agua a nivel mundial." },
+    { q:"¿Cuántos litros de agua se necesitan para producir un kilo de carne de res?", opts:["500 litros","5,000 litros","15,000 litros","1 millón de litros"], ans:2, exp:"Se necesitan aproximadamente 15,000 litros de agua para producir 1 kg de carne de res. ¡Una razón más para reducir su consumo!" },
+    { q:"¿Qué porcentaje del agua de la Tierra es apta para consumo humano?", opts:["50%","20%","10%","Menos del 3%"], ans:3, exp:"Solo el 2.5–3% del agua del planeta es dulce, y de esa fracción, muy poca es accesible y potable directamente." },
+    { q:"¿Qué material tarda más de 400 años en degradarse en el océano?", opts:["Papel","Vidrio","Plástico","Algodón"], ans:2, exp:"El plástico puede tardar entre 400 y 1,000 años en degradarse. Hay más de 150 millones de toneladas en nuestros océanos." },
+    { q:"¿Cuál acción ayuda MÁS a reducir la contaminación del agua en casa?", opts:["Bañarse todos los días","Tirar aceite por el drenaje","Usar menos detergentes químicos","Regar plantas con agua del grifo"], ans:2, exp:"Los detergentes con fosfatos destruyen la vida acuática al llegar a ríos y mares. Usar biodegradables marca una gran diferencia." }
   ];
   let current = 0, score = 0, answered = false;
-  const letters = ['A', 'B', 'C', 'D'];
+  const letters = ['A','B','C','D'];
 
   function renderQuiz() {
     answered = false;
     const q = questions[current];
-    document.getElementById('quiz-progress').textContent = `Pregunta ${current + 1} de ${questions.length}`;
-    document.getElementById('quiz-dots').innerHTML = questions.map((_, i) =>
-      `<div class="dot ${i < current ? 'done' : i === current ? 'current' : ''}"></div>`
-    ).join('');
+    document.getElementById('quiz-progress').textContent = `Pregunta ${current+1} de ${questions.length}`;
+    document.getElementById('quiz-dots').innerHTML = questions.map((_,i) =>
+      `<div class="dot ${i<current?'done':i===current?'current':''}"></div>`).join('');
     document.getElementById('quiz-question').textContent = q.q;
-    document.getElementById('quiz-opts').innerHTML = q.opts.map((o, i) =>
+    document.getElementById('quiz-opts').innerHTML = q.opts.map((o,i) =>
       `<div class="quiz-opt" id="opt${i}" role="button" tabindex="0" onclick="answer(${i})" onkeydown="if(event.key==='Enter')answer(${i})">
-        <span class="opt-letter">${letters[i]}</span>${o}
-      </div>`
-    ).join('');
+        <span class="opt-letter">${letters[i]}</span>${o}</div>`).join('');
     const fb = document.getElementById('quiz-feedback');
-    fb.className = 'quiz-feedback';
-    fb.textContent = '';
+    fb.className = 'quiz-feedback'; fb.textContent = '';
     const btn = document.getElementById('btn-next');
     btn.className = 'btn-next';
-    btn.textContent = current === questions.length - 1 ? 'Ver resultados →' : 'Siguiente →';
+    btn.textContent = current === questions.length-1 ? 'Ver resultados →' : 'Siguiente →';
   }
 
   function answer(i) {
@@ -555,10 +844,9 @@
     if (i === q.ans) { opts[i].classList.add('correct'); score++; }
     else { opts[i].classList.add('wrong'); opts[q.ans].classList.add('correct'); }
     const fb = document.getElementById('quiz-feedback');
-    fb.textContent = (i === q.ans ? '✅ ¡Correcto! ' : '❌ Incorrecto. ') + q.exp;
-    fb.className = 'quiz-feedback show ' + (i === q.ans ? 'correct' : 'wrong');
-    const btn = document.getElementById('btn-next');
-    btn.classList.add('show');
+    fb.textContent = (i===q.ans ? '✅ ¡Correcto! ' : '❌ Incorrecto. ') + q.exp;
+    fb.className = 'quiz-feedback show ' + (i===q.ans ? 'correct' : 'wrong');
+    document.getElementById('btn-next').classList.add('show');
   }
 
   function nextQuestion() {
@@ -570,16 +858,15 @@
 
   function showResult() {
     document.getElementById('quiz-content').style.display = 'none';
-    const rb = document.getElementById('result-box');
-    rb.classList.add('show');
-    const pct = Math.round((score / questions.length) * 100);
+    document.getElementById('result-box').classList.add('show');
+    const pct = Math.round((score/questions.length)*100);
     let emoji, msg;
-    if (pct >= 80) { emoji = '🏆'; msg = '¡Excelente! Eres un/a verdadero/a defensor/a del agua. ¡Comparte lo que sabes con tu comunidad!'; }
-    else if (pct >= 60) { emoji = '👍'; msg = '¡Buen trabajo! Sigue aprendiendo sobre este importante tema y pronto serás un experto.'; }
-    else { emoji = '📚'; msg = '¡No te rindas! Repasa la información de esta página y vuelve a intentarlo.'; }
+    if (pct>=80) { emoji='🏆'; msg='¡Excelente! Eres un/a verdadero/a defensor/a del agua. ¡Comparte lo que sabes!'; }
+    else if (pct>=60) { emoji='👍'; msg='¡Buen trabajo! Sigue aprendiendo sobre este importante tema.'; }
+    else { emoji='📚'; msg='¡No te rindas! Repasa la información y vuelve a intentarlo.'; }
     document.getElementById('result-emoji').textContent = emoji;
     document.getElementById('result-score').textContent = score + ' / ' + questions.length + ' correctas';
-    document.getElementById('result-score').style.color = pct >= 80 ? 'var(--green)' : pct >= 60 ? 'var(--amber)' : 'var(--coral)';
+    document.getElementById('result-score').style.color = pct>=80?'var(--green)':pct>=60?'var(--amber)':'var(--coral)';
     document.getElementById('result-msg').textContent = msg;
   }
 
